@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상품 상세 - KB 애니클럽</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="./common.js"></script>
+  </head>
+  <body>
+    <!-- 네비게이션 바 -->
+    <nav>
+      <div class="logo">KB 애니클럽</div>
+      <div class="hamburger-menu" onclick="toggleMenu()">☰</div>
+      <ul class="nav-links">
+        <li><a href="main.html">홈</a></li>
+        <li><a href="#">카테고리</a></li>
+        <li><a href="#">신상품</a></li>
+        <li><a href="#">베스트</a></li>
+        <li><a href="#">기획전</a></li>
+      </ul>
+    </nav>
+
+    <!-- 상품 상세 섹션 -->
+    <main class="product-detail">
+      <div class="product-image">
+        <img id="productImage" src="" alt="상품 이미지" />
+      </div>
+      <div class="product-info">
+        <h1 id="productName" class="product-name">상품 이름</h1>
+        <p id="productDescription" class="product-description">상품 설명</p>
+        <p id="productPrice" class="product-price">₩0</p>
+        <div class="product-actions">
+          <div class="quantity-wrapper">
+            <label for="quantity">갯수:</label>
+            <input id="quantity" type="number" value="1" min="1" />
+          </div>
+          <button class="buy-now" onclick="goToCheckout()">구매하기</button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 KB 애니클럽. 숨지말고 즐겨라!</p>
+    </footer>
+
+    <script>
+      // JSON 파일에서 상품 데이터 가져오기
+      fetch('products.json')
+        .then((response) => response.json())
+        .then((data) => {
+          const productName = getParameterByName('name');
+          const product = data.find((item) => item.name === productName);
+
+          if (product) {
+            document.getElementById('productName').textContent = product.name;
+            document.getElementById('productPrice').textContent = `₩${product.price}`;
+            document.getElementById('productImage').src = `./img/${product.image}`;
+
+            // 줄바꿈을 HTML에서 표시하도록 변환
+            document.getElementById('productDescription').innerHTML = product.description.replace(/\n/g, '<br>');
+          }
+        })
+        .catch((error) => console.error('상품 데이터를 불러오는 중 오류가 발생했습니다:', error));
+    </script>
+  </body>
+</html>
