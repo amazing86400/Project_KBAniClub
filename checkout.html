@@ -28,11 +28,24 @@
         <section class="product-summary">
           <div class="product-list">
             <div class="product-item">
-              <img id="productImage" class="product-image" src="" alt="상품 이미지" />
+              <img
+                id="productImage"
+                class="product-image"
+                src=""
+                alt="상품 이미지"
+              />
               <div class="product-details">
-                <p><strong>상품 이름:</strong> <span id="productName">상품 이름</span></p>
-                <p><strong>상품 가격:</strong> <span id="productPrice">₩0</span></p>
-                <p><strong>상품 수량:</strong> <span id="productQuantity">1</span></p>
+                <p>
+                  <strong>상품 이름:</strong>
+                  <span id="productName">상품 이름</span>
+                </p>
+                <p>
+                  <strong>상품 가격:</strong> <span id="productPrice">₩0</span>
+                </p>
+                <p>
+                  <strong>상품 수량:</strong>
+                  <span id="productQuantity">1</span>
+                </p>
                 <p><strong>배송비:</strong> ₩1,000</p>
               </div>
             </div>
@@ -57,15 +70,32 @@
       <div class="section-box">
         <section class="payment-info">
           <h2>결제 정보</h2>
-          <p><span class="txt">상품 금액:</span> <span id="totalPrice">₩12,000</span></p>
-          <p><span class="txt">배송비:</span> <span id="shippingCost">₩1,000</span></p>
-          <p><span class="txt">할인 금액:</span> <span id="discountAmount">₩0</span></p>
-          <p><span class="txt">총 결제 금액:</span> <span id="totalAmount" class="highlight-price">₩13,000</span></p>
+          <p>
+            <span class="txt">상품 금액:</span>
+            <span id="totalPrice">₩12,000</span>
+          </p>
+          <p>
+            <span class="txt">배송비:</span>
+            <span id="shippingCost">₩1,000</span>
+          </p>
+          <p>
+            <span class="txt">할인 금액:</span>
+            <span id="discountAmount">₩0</span>
+          </p>
+          <p>
+            <span class="txt">총 결제 금액:</span>
+            <span id="totalAmount" class="highlight-price">₩13,000</span>
+          </p>
           <h3>결제 수단</h3>
           <div class="payment-methods">
             <!-- 결제 수단 텍스트 추가 -->
             <label>
-              <input type="radio" name="payment-method" value="credit-card" checked />
+              <input
+                type="radio"
+                name="payment-method"
+                value="credit-card"
+                checked
+              />
               신용/체크카드
             </label>
             <label>
@@ -88,38 +118,51 @@
 
     <script>
       // URL에서 전달받은 상품 정보 표시
-      const productName = getParameterByName('name');
-      const productPriceString = getParameterByName('price');
-      const productPrice = parseInt(productPriceString.replace(/,/g, ''), 10);
-      const productQuantity = parseInt(getParameterByName('quantity'), 10);
+      const productName = getParameterByName("name");
+      const productPriceString = getParameterByName("price");
+      const productPrice = parseInt(productPriceString.replace(/,/g, ""), 10);
+      const productQuantity = parseInt(getParameterByName("quantity"), 10);
       const totalAmount = productPrice * productQuantity;
 
       // products.json에서 상품 이미지 가져오기
-      fetch('products.json')
+      fetch("products.json")
         .then((response) => response.json())
         .then((data) => {
           const product = data.find((item) => item.name === productName);
           if (product) {
             // 이미지 설정
-            document.getElementById('productImage').src = `./img/${product.image}`;
+            document.getElementById(
+              "productImage"
+            ).src = `./img/${product.image}`;
           } else {
-            console.error('해당 상품을 찾을 수 없습니다.');
+            console.error("해당 상품을 찾을 수 없습니다.");
           }
         })
-        .catch((error) => console.error('상품 데이터를 불러오는 중 오류가 발생했습니다:', error));
+        .catch((error) =>
+          console.error("상품 데이터를 불러오는 중 오류가 발생했습니다:", error)
+        );
 
       // 상품 정보 및 가격 표시
-      document.getElementById('productName').textContent = productName;
-      document.getElementById('productPrice').textContent = `₩${formatNumber(productPrice)}`;
-      document.getElementById('totalPrice').textContent = `₩${formatNumber(totalAmount)}`;
-      document.getElementById('productQuantity').textContent = `${productQuantity}`;
-      document.getElementById('totalAmount').textContent = `₩${formatNumber(totalAmount + 1000)}`;
-
+      document.getElementById("productName").textContent = productName;
+      document.getElementById("productPrice").textContent = `₩${formatNumber(
+        productPrice
+      )}`;
+      document.getElementById("totalPrice").textContent = `₩${formatNumber(
+        totalAmount
+      )}`;
+      document.getElementById(
+        "productQuantity"
+      ).textContent = `${productQuantity}`;
+      document.getElementById("totalAmount").textContent = `₩${formatNumber(
+        totalAmount + 1000
+      )}`;
 
       // 구매하기 버튼 클릭 시 구매 완료 페이지로 이동
-      document.querySelector('.buy-now').addEventListener('click', () => {
-        const productImage = document.getElementById('productImage').src;
-        window.location.href = `complete.html?image=${encodeURIComponent(productImage)}`;
+      document.querySelector(".buy-now").addEventListener("click", () => {
+        const productImage = document.getElementById("productImage").src;
+        window.location.href = `complete.html?image=${encodeURIComponent(
+          productImage
+        )}`;
       });
     </script>
   </body>

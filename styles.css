@@ -112,7 +112,10 @@ main {
 /* 상품 그리드 스타일 */
 .product-slider {
   display: grid;
-  grid-template-columns: repeat(5, minmax(150px, 1fr)); /* 카드의 최소 너비 설정 */
+  grid-template-columns: repeat(
+    5,
+    minmax(150px, 1fr)
+  ); /* 카드의 최소 너비 설정 */
   gap: 15px; /* 카드 간 간격을 줄임 */
 }
 
@@ -217,7 +220,7 @@ main {
   font-size: 1rem; /* 텍스트 크기 */
 }
 
-.product-actions input[type='number'] {
+.product-actions input[type="number"] {
   width: 60px; /* 입력 박스 너비 */
   padding: 0.5rem;
   font-size: 1rem;
@@ -616,7 +619,7 @@ main {
     font-size: 0.9rem; /* 텍스트 크기 조정 */
   }
 
-  .product-actions input[type='number'] {
+  .product-actions input[type="number"] {
     width: 60px; /* 입력 박스 너비 */
     padding: 0.5rem;
     font-size: 1rem;
