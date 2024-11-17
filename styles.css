@@ -282,35 +282,6 @@ main {
   margin-bottom: 2rem;
 }
 
-/* 뒤로가기 버튼 스타일 */
-/* .back-button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  background-color: #f4f4f4;
-  color: #333;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.back-button:hover {
-  background-color: #d6d6d6;
-} */
-
-/* 뒤로가기 아이콘 스타일 */
-/* .back-icon {
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-} */
-
 .product-summary {
   display: flex; /* 가로 배치 */
   gap: 3rem; /* 이미지와 상품 정보 간 간격 */
@@ -450,7 +421,79 @@ main {
   gap: 1rem;
 }
 
-/* 반응형 디자인 */
+/* 구매 완료 페이지 스타일 */
+.complete-page {
+  position: relative;
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  height: calc(100vh - 70px); /* 네비게이션 바 높이를 제외한 화면 높이 */
+  overflow: hidden;
+}
+
+/* 배경 이미지 스타일 */
+.background-image {
+  position: absolute;
+  top: 10%; /* 화면 상단에서 10% 여백 */
+  left: 10%; /* 화면 좌측에서 10% 여백 */
+  width: 80%; /* 화면 너비의 80% */
+  height: 80%; /* 화면 높이의 80% */
+  background-size: contain; /* 이미지 비율 유지 */
+  background-position: center;
+  background-repeat: repeat;
+  filter: brightness(0.5); /* 어둡게 처리 */
+  border-radius: 16px; /* 모서리 라운드 */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
+  z-index: 1;
+}
+
+/* 구매 완료 메시지 */
+.complete-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.9); /* 반투명 배경 */
+  border-radius: 12px; /* 메시지 박스의 라운드 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 메시지 박스 그림자 */
+  padding: 2rem 3rem;
+  max-width: 400px;
+  text-align: center;
+}
+
+.complete-message h1 {
+  font-size: 1.8rem;
+  color: #333;
+  white-space: nowrap; /* 텍스트를 한 줄로 유지 */
+  overflow: hidden; /* 텍스트가 너무 길 경우 숨김 */
+  text-overflow: ellipsis; /* 너무 길면 말줄임표 추가 */
+  max-width: 100%;
+  padding: 1rem 3rem;
+}
+
+.complete-message p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.home-button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #ff4081;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.home-button:hover {
+  background-color: #ee3573;
+}
+
+/* 모바일 */
 @media (max-width: 768px) {
   /* 배너와 검색, 장바구니 숨기기 */
   .main-banner,
@@ -612,6 +655,41 @@ main {
     width: 100%;
     text-align: left;
   }
+
+  .coupon-section select {
+    margin-left: 0rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .payment-methods label {
+    display: block; /* 라벨 세로 배치 */
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .complete-message h1 {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  .complete-message p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+  }
+
+  .home-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.7rem;
+    color: #fff;
+    background-color: #ff4081;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
 }
 
 @media (max-width: 480px) {
@@ -630,5 +708,10 @@ main {
 
   .product-slider {
     grid-template-columns: 1fr;
+  }
+
+  .coupon-section select {
+    padding: 0.5rem;
+    font-size: 1rem;
   }
 }
