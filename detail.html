@@ -46,22 +46,29 @@
 
     <script>
       // JSON 파일에서 상품 데이터 가져오기
-      fetch('products.json')
+      fetch("products.json")
         .then((response) => response.json())
         .then((data) => {
-          const productName = getParameterByName('name');
+          const productName = getParameterByName("name");
           const product = data.find((item) => item.name === productName);
 
           if (product) {
-            document.getElementById('productName').textContent = product.name;
-            document.getElementById('productPrice').textContent = `₩${product.price}`;
-            document.getElementById('productImage').src = `./img/${product.image}`;
+            document.getElementById("productName").textContent = product.name;
+            document.getElementById(
+              "productPrice"
+            ).textContent = `₩${product.price}`;
+            document.getElementById(
+              "productImage"
+            ).src = `./img/${product.image}`;
 
             // 줄바꿈을 HTML에서 표시하도록 변환
-            document.getElementById('productDescription').innerHTML = product.description.replace(/\n/g, '<br>');
+            document.getElementById("productDescription").innerHTML =
+              product.description.replace(/\n/g, "<br>");
           }
         })
-        .catch((error) => console.error('상품 데이터를 불러오는 중 오류가 발생했습니다:', error));
+        .catch((error) =>
+          console.error("상품 데이터를 불러오는 중 오류가 발생했습니다:", error)
+        );
     </script>
   </body>
 </html>

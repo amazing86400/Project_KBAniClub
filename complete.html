@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>구매 완료</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="common.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>구매 완료</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="common.js"></script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const imageUrl = getParameterByName('image');
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const imageUrl = getParameterByName("image");
         if (imageUrl) {
-            const backgroundImage = document.getElementById('backgroundImage');
-            backgroundImage.style.backgroundImage = `url(${decodeURIComponent(imageUrl)})`;
+          const backgroundImage = document.getElementById("backgroundImage");
+          backgroundImage.style.backgroundImage = `url(${decodeURIComponent(
+            imageUrl
+          )})`;
         }
-    });
-  </script>
-</head>
-<body>
+      });
+    </script>
+  </head>
+  <body>
     <!-- 네비게이션 바 -->
     <nav class="navbar">
-        <div class="logo">KB 애니클럽</div>
-        <div class="hamburger-menu" onclick="toggleMenu()">☰</div>
-        <ul class="nav-links">
-          <li><a href="main.html">홈</a></li>
-        </ul>
-      </nav>
-  
+      <div class="logo">KB 애니클럽</div>
+      <div class="hamburger-menu" onclick="toggleMenu()">☰</div>
+      <ul class="nav-links">
+        <li><a href="main.html">홈</a></li>
+      </ul>
+    </nav>
+
     <!-- 구매 완료 페이지 콘텐츠 -->
     <main class="complete-page">
       <!-- 배경 이미지 -->
@@ -35,12 +37,14 @@
       <div class="complete-message">
         <h1>요시! 아리가또!</h1>
         <p>덕후님의 열정에 감탄했습니다!</p>
-        <button class="home-button" onclick="location.href='main.html'">홈으로</button>
+        <button class="home-button" onclick="location.href='main.html'">
+          홈으로
+        </button>
       </div>
     </main>
-  
+
     <footer>
-        <p>&copy; 2024 KB 애니클럽. 숨지말고 즐겨라!</p>
-      </footer>
+      <p>&copy; 2024 KB 애니클럽. 숨지말고 즐겨라!</p>
+    </footer>
   </body>
 </html>
