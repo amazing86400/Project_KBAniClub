@@ -32,9 +32,7 @@ function hybrid(object) {
   let GAData = { ...commonData, ...object };
   isAndroid
     ? window.gascriptAndroid.GAHybrid(JSON.stringify(GAData))
-    : webkit.messageHandlers.gascriptCallbackHandler.postMessage(
-        JSON.stringify(GAData)
-      );
+    : webkit.messageHandlers.gascriptiOS.postMessage(JSON.stringify(GAData));
 }
 
 function sendGAPage(object) {
@@ -117,6 +115,7 @@ function sendGAEcommerce(eventData, transaction, items) {
 // 클릭 이벤트
 function btnClickEvent(action, label) {
   const eventData = {
+    event_name: "click_event",
     ep_category: "클릭",
     ep_action: action,
     ep_label: label,

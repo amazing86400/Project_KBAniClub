@@ -37,7 +37,7 @@
           card.addEventListener("click", (event) => {
             const productName = card.querySelector(".product-name").textContent;
             const eventData = {
-              event_name: "select_iten",
+              event_name: "select_item",
               ep_category: "ecommerce",
               ep_action: "상품 선택",
             };
@@ -66,7 +66,6 @@
             ];
 
             sendGAEcommerce(eventData, transaction, items);
-            console.log(window.dataLayer);
           });
         });
       });
