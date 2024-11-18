@@ -115,6 +115,7 @@ function sendGAEcommerce(eventData, transaction, items) {
 // 클릭 이벤트
 function btnClickEvent(action, label) {
   const eventData = {
+    event_name: "click_event",
     ep_category: "클릭",
     ep_action: action,
     ep_label: label,
