@@ -23,7 +23,7 @@ fetch("./data/products.json")
 window.addEventListener("load", () => {
   const productName = document.getElementById("productName").textContent;
   const eventData = {
-    event_name: "view_iten",
+    event_name: "view_item",
     ep_category: "ecommerce",
     ep_action: "상품 상세",
   };

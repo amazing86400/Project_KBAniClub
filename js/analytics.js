@@ -32,9 +32,7 @@ function hybrid(object) {
   let GAData = { ...commonData, ...object };
   isAndroid
     ? window.gascriptAndroid.GAHybrid(JSON.stringify(GAData))
-    : webkit.messageHandlers.gascriptCallbackHandler.postMessage(
-        JSON.stringify(GAData)
-      );
+    : webkit.messageHandlers.gascriptiOS.postMessage(JSON.stringify(GAData));
 }
 
 function sendGAPage(object) {
