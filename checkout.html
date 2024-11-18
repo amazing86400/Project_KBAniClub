@@ -3,23 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Google Tag Manager -->
+
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="./js/common.js"></script>
+    <script src="./js/analytics.js"></script>
+    <script src="./js/checkout.js"></script>
+
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-56L8DVV");
+      const screenData = {
+        title: "메인 페이지",
+
+        ep_first: "이벤트 매개변수1",
+        ep_second: "이벤트 매개변수2",
+        ep_third: "이벤트 매개변수3",
+        ep_fourth: "이벤트 매개변수4",
+
+        up_first: "사용자 속성1",
+        up_second: "사용자 속성2",
+        up_third: "사용자 속성3",
+        up_fourth: "사용자 속성4",
+      };
+
+      sendGAPage(screenData);
     </script>
-    <!-- End Google Tag Manager -->
+
     <title>상품 결제 - KB 애니클럽</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="common.js"></script>
   </head>
   <body>
     <!-- 네비게이션 바 -->
@@ -27,7 +35,9 @@
       <div class="logo">KB 애니클럽</div>
       <div class="hamburger-menu" onclick="toggleMenu()">☰</div>
       <ul class="nav-links">
-        <li><a href="main.html">홈</a></li>
+        <li>
+          <a href="main.html" onclick="btnClickEvent('네비게이션', '홈')">홈</a>
+        </li>
       </ul>
     </nav>
 
@@ -121,7 +131,7 @@
               무통장입금
             </label>
           </div>
-          <button class="buy-now">구매하기</button>
+          <button class="buy-now" onclick="goToPurchase()">구매하기</button>
         </section>
       </div>
     </main>
@@ -129,55 +139,5 @@
     <footer>
       <p>&copy; 2024 KB 애니클럽. 숨지말고 즐겨라!</p>
     </footer>
-
-    <script>
-      // URL에서 전달받은 상품 정보 표시
-      const productName = getParameterByName("name");
-      const productPriceString = getParameterByName("price");
-      const productPrice = parseInt(productPriceString.replace(/,/g, ""), 10);
-      const productQuantity = parseInt(getParameterByName("quantity"), 10);
-      const totalAmount = productPrice * productQuantity;
-
-      // products.json에서 상품 이미지 가져오기
-      fetch("products.json")
-        .then((response) => response.json())
-        .then((data) => {
-          const product = data.find((item) => item.name === productName);
-          if (product) {
-            // 이미지 설정
-            document.getElementById(
-              "productImage"
-            ).src = `./img/${product.image}`;
-          } else {
-            console.error("해당 상품을 찾을 수 없습니다.");
-          }
-        })
-        .catch((error) =>
-          console.error("상품 데이터를 불러오는 중 오류가 발생했습니다:", error)
-        );
-
-      // 상품 정보 및 가격 표시
-      document.getElementById("productName").textContent = productName;
-      document.getElementById("productPrice").textContent = `₩${formatNumber(
-        productPrice
-      )}`;
-      document.getElementById("totalPrice").textContent = `₩${formatNumber(
-        totalAmount
-      )}`;
-      document.getElementById(
-        "productQuantity"
-      ).textContent = `${productQuantity}`;
-      document.getElementById("totalAmount").textContent = `₩${formatNumber(
-        totalAmount + 1000
-      )}`;
-
-      // 구매하기 버튼 클릭 시 구매 완료 페이지로 이동
-      document.querySelector(".buy-now").addEventListener("click", () => {
-        const productImage = document.getElementById("productImage").src;
-        window.location.href = `complete.html?image=${encodeURIComponent(
-          productImage
-        )}`;
-      });
-    </script>
   </body>
 </html>

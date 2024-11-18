@@ -3,23 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Google Tag Manager -->
+
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="./js/common.js"></script>
+    <script src="./js/analytics.js"></script>
+
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-56L8DVV");
+      const screenData = {
+        title: "구매 완료 페이지",
+
+        ep_first: "이벤트 매개변수1",
+        ep_second: "이벤트 매개변수2",
+        ep_third: "이벤트 매개변수3",
+        ep_fourth: "이벤트 매개변수4",
+
+        up_first: "사용자 속성1",
+        up_second: "사용자 속성2",
+        up_third: "사용자 속성3",
+        up_fourth: "사용자 속성4",
+      };
+
+      sendGAPage(screenData);
     </script>
-    <!-- End Google Tag Manager -->
+
     <title>구매 완료</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="common.js"></script>
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
@@ -30,6 +37,49 @@
             imageUrl
           )})`;
         }
+
+        const productName = getParameterByName("name");
+        const productPriceString = getParameterByName("price");
+        const productPrice = parseInt(productPriceString.replace(/,/g, ""), 10);
+        const productQuantity = parseInt(getParameterByName("quantity"), 10);
+        const totalAmount = parseInt(getParameterByName("value"), 10);
+        const coupon = getParameterByName("coupon");
+        const discount = coupon == "쿠폰 없음" ? 0 : 1000;
+
+        const eventData = {
+          event_name: "purchase",
+          ep_category: "ecommerce",
+          ep_action: "구매 완료",
+        };
+
+        const transaction = {
+          transaction_id: "T_" + new Date().getTime(),
+          currency: "KRW",
+          value: totalAmount,
+          coupon: coupon,
+          shipping: 1000,
+        };
+
+        const items = [
+          {
+            item_id: productName,
+            item_name: productName,
+            item_brand: productName.substring(0, productName.length - 2),
+            item_category: "애니메이션",
+            item_category2: "일본",
+            item_category3: "만화",
+            item_category4: "15세",
+            item_category5: productName.substring(0, productName.length - 2),
+            coupon: coupon,
+            discount: discount,
+            price: productPrice,
+            quantity: productQuantity,
+            ip_first: "상품 매개변수1",
+            ip_second: "상품 매개변수2",
+          },
+        ];
+
+        sendGAEcommerce(eventData, transaction, items);
       });
     </script>
   </head>
@@ -39,7 +89,9 @@
       <div class="logo">KB 애니클럽</div>
       <div class="hamburger-menu" onclick="toggleMenu()">☰</div>
       <ul class="nav-links">
-        <li><a href="main.html">홈</a></li>
+        <li>
+          <a href="main.html" onclick="btnClickEvent('네비게이션', '홈')">홈</a>
+        </li>
       </ul>
     </nav>
 
@@ -51,7 +103,10 @@
       <div class="complete-message">
         <h1>요시! 아리가또!</h1>
         <p>덕후님의 열정에 감탄했습니다!</p>
-        <button class="home-button" onclick="location.href='main.html'">
+        <button
+          class="home-button"
+          onclick="btnClickEvent('구매 완료', '홈 이동'); location.href='main.html';"
+        >
           홈으로
         </button>
       </div>

@@ -3,24 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Google Tag Manager -->
+
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="./js/common.js"></script>
+    <script src="./js/analytics.js"></script>
+
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-56L8DVV");
+      const screenData = {
+        title: "메인 페이지",
+
+        ep_first: "이벤트 매개변수1",
+        ep_second: "이벤트 매개변수2",
+        ep_third: "이벤트 매개변수3",
+        ep_fourth: "이벤트 매개변수4",
+
+        up_first: "사용자 속성1",
+        up_second: "사용자 속성2",
+        up_third: "사용자 속성3",
+        up_fourth: "사용자 속성4",
+      };
+
+      sendGAPage(screenData);
     </script>
-    <!-- End Google Tag Manager -->
 
     <title>KB 애니클럽</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="./common.js"></script>
+
+    <script>
+      // 상품 선택
+      document.addEventListener("DOMContentLoaded", () => {
+        const productCards = document.querySelectorAll(".product-card");
+
+        productCards.forEach((card) => {
+          card.addEventListener("click", (event) => {
+            const productName = card.querySelector(".product-name").textContent;
+            const eventData = {
+              event_name: "select_iten",
+              ep_category: "ecommerce",
+              ep_action: "상품 선택",
+            };
+
+            const transaction = {
+              currency: "KRW",
+            };
+
+            const items = [
+              {
+                item_id: productName,
+                item_name: productName,
+                item_brand: productName.substring(0, productName.length - 2),
+                item_category: "애니메이션",
+                item_category2: "일본",
+                item_category3: "만화",
+                item_category4: "15세",
+                item_category5: productName.substring(
+                  0,
+                  productName.length - 2
+                ),
+                price: 6000,
+                ip_first: "상품 매개변수1",
+                ip_second: "상품 매개변수2",
+              },
+            ];
+
+            sendGAEcommerce(eventData, transaction, items);
+            console.log(window.dataLayer);
+          });
+        });
+      });
+    </script>
   </head>
   <body>
     <!-- 네비게이션 바 -->
@@ -28,11 +78,21 @@
       <div class="logo">KB 애니클럽</div>
       <div class="hamburger-menu" onclick="toggleMenu()">☰</div>
       <ul class="nav-links">
-        <li><a href="#">홈</a></li>
-        <li><a href="#">카테고리</a></li>
-        <li><a href="#">신상품</a></li>
-        <li><a href="#">베스트</a></li>
-        <li><a href="#">기획전</a></li>
+        <li><a href="#" onclick="btnClickEvent('네비게이션', '홈')">홈</a></li>
+        <li>
+          <a href="#" onclick="btnClickEvent('네비게이션', '카테고리')"
+            >카테고리</a
+          >
+        </li>
+        <li>
+          <a href="#" onclick="btnClickEvent('네비게이션', '신상품')">신상품</a>
+        </li>
+        <li>
+          <a href="#" onclick="btnClickEvent('네비게이션', '베스트')">베스트</a>
+        </li>
+        <li>
+          <a href="#" onclick="btnClickEvent('네비게이션', '기획전')">기획전</a>
+        </li>
       </ul>
       <div class="search-cart">
         <input type="text" placeholder="검색어를 입력하세요" />
@@ -45,7 +105,9 @@
     <header class="main-banner">
       <h1>특별 할인! <span>신상품 최대 50% OFF</span></h1>
       <p>KB 애니클럽에서 마음껏 즐기세요!</p>
-      <button class="shop-now">지금 쇼핑하기</button>
+      <button class="shop-now" onclick="btnClickEvent('배너', '쇼핑하기')">
+        지금 쇼핑하기
+      </button>
     </header>
 
     <!-- 상품 그리드 섹션 -->
@@ -150,7 +212,5 @@
     <footer>
       <p>&copy; 2024 KB 애니클럽. 숨지말고 즐겨라!</p>
     </footer>
-
-    <script src="script.js"></script>
   </body>
 </html>

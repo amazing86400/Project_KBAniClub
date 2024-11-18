@@ -3,23 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Google Tag Manager -->
+
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="./js/common.js"></script>
+    <script src="./js/analytics.js"></script>
+    <script src="./js/detail.js"></script>
+
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-56L8DVV");
+      const screenData = {
+        title: "상품 상세 페이지",
+
+        ep_first: "이벤트 매개변수1",
+        ep_second: "이벤트 매개변수2",
+        ep_third: "이벤트 매개변수3",
+        ep_fourth: "이벤트 매개변수4",
+
+        up_first: "사용자 속성1",
+        up_second: "사용자 속성2",
+        up_third: "사용자 속성3",
+        up_fourth: "사용자 속성4",
+      };
+
+      sendGAPage(screenData);
     </script>
-    <!-- End Google Tag Manager -->
+
     <title>상품 상세 - KB 애니클럽</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="./common.js"></script>
   </head>
   <body>
     <!-- 네비게이션 바 -->
@@ -27,11 +35,23 @@
       <div class="logo">KB 애니클럽</div>
       <div class="hamburger-menu" onclick="toggleMenu()">☰</div>
       <ul class="nav-links">
-        <li><a href="main.html">홈</a></li>
-        <li><a href="#">카테고리</a></li>
-        <li><a href="#">신상품</a></li>
-        <li><a href="#">베스트</a></li>
-        <li><a href="#">기획전</a></li>
+        <li>
+          <a href="main.html" onclick="btnClickEvent('네비게이션', '홈')">홈</a>
+        </li>
+        <li>
+          <a href="#" onclick="btnClickEvent('네비게이션', '카테고리')"
+            >카테고리</a
+          >
+        </li>
+        <li>
+          <a href="#" onclick="btnClickEvent('네비게이션', '신상품')">신상품</a>
+        </li>
+        <li>
+          <a href="#" onclick="btnClickEvent('네비게이션', '베스트')">베스트</a>
+        </li>
+        <li>
+          <a href="#" onclick="btnClickEvent('네비게이션', '기획전')">기획전</a>
+        </li>
       </ul>
     </nav>
 
@@ -57,32 +77,5 @@
     <footer>
       <p>&copy; 2024 KB 애니클럽. 숨지말고 즐겨라!</p>
     </footer>
-
-    <script>
-      // JSON 파일에서 상품 데이터 가져오기
-      fetch("products.json")
-        .then((response) => response.json())
-        .then((data) => {
-          const productName = getParameterByName("name");
-          const product = data.find((item) => item.name === productName);
-
-          if (product) {
-            document.getElementById("productName").textContent = product.name;
-            document.getElementById(
-              "productPrice"
-            ).textContent = `₩${product.price}`;
-            document.getElementById(
-              "productImage"
-            ).src = `./img/${product.image}`;
-
-            // 줄바꿈을 HTML에서 표시하도록 변환
-            document.getElementById("productDescription").innerHTML =
-              product.description.replace(/\n/g, "<br>");
-          }
-        })
-        .catch((error) =>
-          console.error("상품 데이터를 불러오는 중 오류가 발생했습니다:", error)
-        );
-    </script>
   </body>
 </html>
